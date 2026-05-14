@@ -89,9 +89,9 @@
     color: var(--color-text-dark);
     font-family: Georgia, "Times New Roman", serif;
     font-weight: 700;
-    font-size: 1.5rem;
-    padding: 15px 40px;
-    border-radius: 30px;
+    font-size: 1.125rem;
+    padding: 12px 32px;
+    border-radius: var(--radius-button);
     border: 1px solid white;
     pointer-events: auto;
     transition: background-color 120ms ease;
