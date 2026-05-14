@@ -81,7 +81,7 @@
     color: var(--color-text-secondary);
     font-family: var(--font-status);
     font-style: italic;
-    font-size: 1.125rem;
+    font-size: 1.725rem;
 }
 
 .close-button {
@@ -89,8 +89,8 @@
     color: var(--color-text-dark);
     font-family: Georgia, "Times New Roman", serif;
     font-weight: 700;
-    font-size: 1.125rem;
-    padding: 12px 32px;
+    font-size: 1.6875rem;
+    padding: 18px 48px;
     border-radius: var(--radius-button);
     border: 1px solid white;
     pointer-events: auto;
