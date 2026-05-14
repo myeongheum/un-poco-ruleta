@@ -1,4 +1,4 @@
-const STORAGE_KEY = "unpoco-cabeceo-settings";
+const STORAGE_KEY = "unpoco-ruleta-settings";
 
 export const ROLES = ["Leader", "Follower", "Orchestra"];
 
