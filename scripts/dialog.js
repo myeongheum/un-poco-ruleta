@@ -32,6 +32,7 @@ export function openResultDialog({ Leader, Follower, Orchestra }) {
     revealIndex = 0;
     isCloseEnabled = false;
     statusEl.textContent = "Please Click to Reveal";
+    statusEl.hidden = false;
     closeBtn.hidden = true;
 
     cardsContainer.replaceChildren();
@@ -71,7 +72,7 @@ function revealNext() {
 
     if (revealIndex >= cardElements.length) {
         isCloseEnabled = true;
-        statusEl.textContent = "The Destiny is Set.";
+        statusEl.hidden = true;
         closeButtonTimer = setTimeout(() => {
             closeBtn.hidden = false;
             closeButtonTimer = null;
