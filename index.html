@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un Poco de Tango - Cabeceo</title>
+    <link rel="icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="styles/theme.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/card.css">
+    <link rel="stylesheet" href="styles/dialog.css">
+</head>
+<body>
+    <main class="app">
+        <div class="app__viewport">
+            <header class="app__header">
+                <h1 class="app__title">Un Poco de Tango</h1>
+                <p class="app__subtitle">Manage Participants</p>
+                <hr class="app__separator">
+            </header>
+
+            <section class="columns">
+                <article class="column" data-role="Leader">
+                    <header class="column__header">
+                        <h2 class="column__title">LEADERS</h2>
+                        <label class="auto-remove">
+                            <input type="checkbox" class="auto-remove__input" data-auto-remove="Leader">
+                            <span class="auto-remove__check" aria-hidden="true"></span>
+                            <span class="auto-remove__label"></span>
+                        </label>
+                    </header>
+                    <div class="column__input">
+                        <input type="text" class="column__textbox" data-input="Leader" autocomplete="off">
+                        <button type="button" class="column__add" data-add="Leader" aria-label="Add leader">+</button>
+                    </div>
+                    <ul class="participant-list" data-list="Leader"></ul>
+                </article>
+
+                <article class="column" data-role="Follower">
+                    <header class="column__header">
+                        <h2 class="column__title">FOLLOWERS</h2>
+                        <label class="auto-remove">
+                            <input type="checkbox" class="auto-remove__input" data-auto-remove="Follower">
+                            <span class="auto-remove__check" aria-hidden="true"></span>
+                            <span class="auto-remove__label"></span>
+                        </label>
+                    </header>
+                    <div class="column__input">
+                        <input type="text" class="column__textbox" data-input="Follower" autocomplete="off">
+                        <button type="button" class="column__add" data-add="Follower" aria-label="Add follower">+</button>
+                    </div>
+                    <ul class="participant-list" data-list="Follower"></ul>
+                </article>
+
+                <article class="column" data-role="Orchestra">
+                    <header class="column__header">
+                        <h2 class="column__title">ORCHESTRAS</h2>
+                        <label class="auto-remove">
+                            <input type="checkbox" class="auto-remove__input" data-auto-remove="Orchestra">
+                            <span class="auto-remove__check" aria-hidden="true"></span>
+                            <span class="auto-remove__label"></span>
+                        </label>
+                    </header>
+                    <div class="column__input">
+                        <input type="text" class="column__textbox" data-input="Orchestra" autocomplete="off">
+                        <button type="button" class="column__add" data-add="Orchestra" aria-label="Add orchestra">+</button>
+                    </div>
+                    <ul class="participant-list" data-list="Orchestra"></ul>
+                </article>
+            </section>
+
+            <footer class="app__footer">
+                <button type="button" class="draw-button" id="drawButton">¡Cabeceo!</button>
+                <div class="io-actions">
+                    <button type="button" class="io-button" id="exportButton">JSON 내보내기</button>
+                    <button type="button" class="io-button" id="importButton">JSON 불러오기</button>
+                    <input type="file" id="importFile" accept="application/json" hidden>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <div class="result-dialog" id="resultDialog" hidden role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+        <div class="result-dialog__viewport">
+            <header class="result-dialog__header">
+                <h1 class="result-dialog__title" id="resultTitle">El Destino</h1>
+                <p class="result-dialog__subtitle">The Chosen Ones</p>
+            </header>
+            <div class="result-dialog__cards" id="resultCards"></div>
+            <footer class="result-dialog__footer">
+                <p class="result-dialog__status" id="statusText">Please Click to Reveal</p>
+                <button type="button" class="close-button" id="closeButton" hidden>Close</button>
+            </footer>
+        </div>
+    </div>
+
+    <template id="cardTemplate">
+        <div class="card" data-flipped="false">
+            <div class="card__face card__face--back">
+                <div class="card__back-frame"></div>
+                <div class="card__back-content">
+                    <span class="card__back-title">Who is</span>
+                    <span class="card__back-subtitle">Next?</span>
+                </div>
+            </div>
+            <div class="card__face card__face--front">
+                <div class="card__front-inner">
+                    <p class="card__role"></p>
+                    <p class="card__name"></p>
+                    <span class="card__symbol"></span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="participantTemplate">
+        <li class="participant-item">
+            <span class="participant-item__name"></span>
+            <button type="button" class="participant-item__remove" aria-label="Remove">✕</button>
+        </li>
+    </template>
+
+    <script type="module" src="scripts/app.js"></script>
+</body>
+</html>

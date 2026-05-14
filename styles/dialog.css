@@ -1,0 +1,106 @@
+.result-dialog {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: linear-gradient(180deg, var(--color-overlay-start) 0%, var(--color-overlay-end) 100%);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    cursor: pointer;
+}
+
+.result-dialog[hidden] {
+    display: none;
+}
+
+.result-dialog__viewport {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 50px;
+}
+
+.result-dialog__header {
+    text-align: center;
+    pointer-events: none;
+}
+
+.result-dialog__title {
+    margin: 0;
+    color: var(--color-gold);
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 3.75rem);
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+}
+
+.result-dialog__subtitle {
+    margin: 10px 0 0;
+    color: #DDDDDD;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    opacity: 0.8;
+}
+
+.result-dialog__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-items: center;
+    gap: 30px;
+    padding: 30px;
+    pointer-events: none;
+}
+
+.result-dialog__cards > .card {
+    pointer-events: none;
+}
+
+.result-dialog__footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    min-height: 100px;
+    pointer-events: none;
+}
+
+.result-dialog__status {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-family: var(--font-status);
+    font-style: italic;
+    font-size: 1.125rem;
+}
+
+.close-button {
+    background-color: var(--color-gold);
+    color: var(--color-text-dark);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    padding: 15px 40px;
+    border-radius: 30px;
+    border: 1px solid white;
+    pointer-events: auto;
+    transition: background-color 120ms ease;
+}
+
+.close-button:hover {
+    background-color: var(--color-gold-hover);
+}
+
+.close-button[hidden] {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    .result-dialog__viewport {
+        padding: 20px;
+    }
+    .result-dialog__cards {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 10px;
+    }
+}

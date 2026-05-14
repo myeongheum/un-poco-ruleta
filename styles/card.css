@@ -1,0 +1,139 @@
+.card {
+    position: relative;
+    width: 320px;
+    height: 500px;
+    transform-origin: center center;
+    transform: scaleX(1);
+}
+
+.card[data-flipped="true"] {
+    animation: card-flip 2s ease forwards;
+}
+
+.card__face {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+}
+
+/* === Back face === */
+.card__face--back {
+    background-color: var(--color-card-back);
+    border: 2px solid var(--color-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.card[data-flipped="true"] .card__face--back {
+    animation: card-back-hide 2s steps(1, end) forwards;
+}
+
+.card__back-frame {
+    position: absolute;
+    inset: 10px;
+    border: 1px solid var(--color-gold);
+    border-radius: 8px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.card__back-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-gold);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.card__back-title {
+    font-size: 2.25rem;
+    opacity: 0.9;
+}
+
+.card__back-subtitle {
+    font-size: 1.5rem;
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* === Front face === */
+.card__face--front {
+    background-color: var(--color-card-front);
+    opacity: 0;
+}
+
+.card[data-flipped="true"] .card__face--front {
+    animation: card-front-show 2s steps(1, end) forwards;
+}
+
+.card__front-inner {
+    position: absolute;
+    inset: 15px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+}
+
+.card__role {
+    margin: 0;
+    text-align: center;
+    color: var(--color-text-muted);
+    font-family: var(--font-title);
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.card__name {
+    margin: 20px 5px;
+    text-align: center;
+    color: var(--color-text-dark);
+    font-family: var(--font-korean);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 5vw, 3.25rem);
+    line-height: 1.1;
+    word-break: keep-all;
+}
+
+.card__symbol {
+    text-align: center;
+    color: var(--color-gold);
+    font-size: 2rem;
+}
+
+/* === Keyframes === */
+/*
+   WPF CardView.xaml의 SplineDoubleKeyFrame 시퀀스를 100% 시간축에 매핑.
+   총 2.0초 = 100%. 67.5%(=1.35s) 시점에 face 토글 + ElasticEase 잔진동 정착.
+*/
+@keyframes card-flip {
+    0%    { transform: scaleX(1); }
+    7.5%  { transform: scaleX(0); }
+    15%   { transform: scaleX(1); }
+    22.5% { transform: scaleX(0); }
+    30%   { transform: scaleX(1); }
+    37.5% { transform: scaleX(0); }
+    45%   { transform: scaleX(1); }
+    52.5% { transform: scaleX(0); }
+    60%   { transform: scaleX(1); }
+    67.5% { transform: scaleX(0); }
+    73%   { transform: scaleX(1.10); }
+    80%   { transform: scaleX(0.93); }
+    87%   { transform: scaleX(1.04); }
+    93%   { transform: scaleX(0.98); }
+    100%  { transform: scaleX(1); }
+}
+
+@keyframes card-back-hide {
+    0%, 67%      { opacity: 1; }
+    67.5%, 100%  { opacity: 0; }
+}
+
+@keyframes card-front-show {
+    0%, 67%      { opacity: 0; }
+    67.5%, 100%  { opacity: 1; }
+}
