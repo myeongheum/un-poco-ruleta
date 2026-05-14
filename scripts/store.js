@@ -31,6 +31,11 @@ export function getAutoRemoveKey(role) {
     return null;
 }
 
+export function normalizeName(s) {
+    if (typeof s !== "string") return "";
+    return s.trim().replace(/\s+/g, " ").toLowerCase();
+}
+
 export function createState() {
     return {
         leaders: [],
@@ -66,13 +71,27 @@ export function normalizeState(input) {
     const base = createState();
     if (!input || typeof input !== "object") return base;
     return {
-        leaders: Array.isArray(input.leaders) ? input.leaders.filter(isString) : base.leaders,
-        followers: Array.isArray(input.followers) ? input.followers.filter(isString) : base.followers,
-        orchestras: Array.isArray(input.orchestras) ? input.orchestras.filter(isString) : base.orchestras,
+        leaders: dedupeStrings(input.leaders),
+        followers: dedupeStrings(input.followers),
+        orchestras: dedupeStrings(input.orchestras),
         isAutoRemoveLeaders: toBool(input.isAutoRemoveLeaders, base.isAutoRemoveLeaders),
         isAutoRemoveFollowers: toBool(input.isAutoRemoveFollowers, base.isAutoRemoveFollowers),
         isAutoRemoveOrchestras: toBool(input.isAutoRemoveOrchestras, base.isAutoRemoveOrchestras),
     };
+}
+
+function dedupeStrings(arr) {
+    if (!Array.isArray(arr)) return [];
+    const seen = new Set();
+    const out = [];
+    for (const v of arr) {
+        if (!isString(v)) continue;
+        const key = normalizeName(v);
+        if (key === "" || seen.has(key)) continue;
+        seen.add(key);
+        out.push(v.trim());
+    }
+    return out;
 }
 
 function isString(v) {

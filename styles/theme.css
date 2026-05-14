@@ -34,6 +34,8 @@
     --radius-button: 25px;
     --radius-item: 5px;
     --radius-input: 3px;
+
+    --color-error: #E55353;
 }
 
 * {

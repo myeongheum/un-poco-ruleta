@@ -3,6 +3,7 @@ import {
     saveState,
     getCollectionKey,
     getAutoRemoveKey,
+    normalizeName,
 } from "./store.js";
 import { renderAll, renderList, renderAutoRemove } from "./render.js";
 import { executeDraw } from "./draw.js";
@@ -66,6 +67,19 @@ function addParticipant(role) {
     if (!name) return;
 
     const key = getCollectionKey(role);
+    if (!key) return;
+
+    const normalized = normalizeName(name);
+    const isDuplicate = state[key].some(
+        (existing) => normalizeName(existing) === normalized
+    );
+    if (isDuplicate) {
+        showDuplicateError(input, role);
+        input.focus();
+        input.select();
+        return;
+    }
+
     state[key] = [...state[key], name];
     input.value = "";
     saveState(state);
@@ -80,4 +94,27 @@ function removeParticipant(role, name) {
     if (state[key].length === before.length) return;
     saveState(state);
     renderList(state, role);
+}
+
+const ariaLive = document.getElementById("a11yAnnouncer");
+
+function showDuplicateError(input, role) {
+    if (!input) return;
+
+    input.classList.remove("column__textbox--error");
+    void input.offsetWidth;
+    input.classList.add("column__textbox--error");
+
+    input.addEventListener(
+        "input",
+        () => input.classList.remove("column__textbox--error"),
+        { once: true }
+    );
+
+    if (ariaLive) {
+        ariaLive.textContent = "";
+        queueMicrotask(() => {
+            ariaLive.textContent = `${role} already added: ${input.value.trim()}`;
+        });
+    }
 }
