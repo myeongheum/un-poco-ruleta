@@ -30,12 +30,6 @@
     letter-spacing: 0.02em;
 }
 
-.app__subtitle {
-    margin: 5px 0 10px;
-    font-size: 0.875rem;
-    color: var(--color-text-secondary);
-}
-
 .app__separator {
     width: 50px;
     height: 1px;
