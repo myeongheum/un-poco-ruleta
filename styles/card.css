@@ -1,6 +1,7 @@
 .card {
     position: relative;
-    width: 320px;
+    width: 380px;
+    max-width: 100%;
     height: 500px;
     transform-origin: center center;
     transform: scaleX(1);
@@ -51,12 +52,12 @@
 }
 
 .card__back-title {
-    font-size: 2.25rem;
+    font-size: 3.25rem;
     opacity: 0.9;
 }
 
 .card__back-subtitle {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     font-style: italic;
     opacity: 0.7;
 }
@@ -72,6 +73,8 @@
 }
 
 .card__front-inner {
+    --card-name-min: 2.5rem;
+    --card-name-size: clamp(var(--card-name-min), 6vw, 5.5rem);
     position: absolute;
     inset: 15px;
     display: grid;
@@ -84,7 +87,7 @@
     text-align: center;
     color: var(--color-text-muted);
     font-family: var(--font-title);
-    font-size: 0.875rem;
+    font-size: var(--card-name-min);
     font-weight: 700;
 }
 
@@ -94,15 +97,16 @@
     color: var(--color-text-dark);
     font-family: var(--font-korean);
     font-weight: 600;
-    font-size: clamp(1.5rem, 5vw, 3.25rem);
+    font-size: var(--card-name-size);
     line-height: 1.1;
     word-break: keep-all;
+    overflow-wrap: anywhere;
 }
 
 .card__symbol {
     text-align: center;
     color: var(--color-gold);
-    font-size: 2rem;
+    font-size: calc(var(--card-name-size) * 0.7);
 }
 
 /* === Keyframes === */

@@ -1,6 +1,7 @@
 import { ROLE_SYMBOLS } from "./store.js";
 
 const FLIP_DURATION_MS = 2000;
+const NAME_MIN_PX = 32;
 
 const dialogEl = document.getElementById("resultDialog");
 const cardsContainer = document.getElementById("resultCards");
@@ -51,6 +52,25 @@ export function openResultDialog({ Leader, Follower, Orchestra }) {
     }
 
     dialogEl.hidden = false;
+    requestAnimationFrame(() => {
+        for (const card of cardElements) fitNameSize(card);
+    });
+}
+
+function fitNameSize(card) {
+    const nameEl = card.querySelector(".card__name");
+    if (!nameEl) return;
+    const containerWidth = nameEl.clientWidth;
+    if (!containerWidth) return;
+
+    nameEl.style.overflowWrap = "normal";
+    let fontPx = parseFloat(getComputedStyle(nameEl).fontSize);
+    let guard = 200;
+    while (nameEl.scrollWidth > containerWidth && fontPx > NAME_MIN_PX && guard-- > 0) {
+        fontPx -= 1;
+        nameEl.style.fontSize = fontPx + "px";
+    }
+    nameEl.style.overflowWrap = "";
 }
 
 function buildCard(role, name) {
